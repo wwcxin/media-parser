@@ -1,4 +1,4 @@
-import * as puppeteer from 'puppeteer';
+import * as puppeteer from 'puppeteer-core';
 import axios from 'axios';
 import { URL } from 'url';
 
@@ -28,6 +28,7 @@ export class MediaParser {
     if (!this.browser) {
       this.browser = await puppeteer.launch({
         headless: true,
+        executablePath: '/usr/bin/google-chrome', // 使用系统安装的 Chrome
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
@@ -38,8 +39,7 @@ export class MediaParser {
           '--no-zygote',
           '--single-process',
           '--disable-extensions'
-        ],
-        executablePath: process.env.CHROME_PATH || undefined
+        ]
       });
     }
   }
